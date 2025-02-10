@@ -1,0 +1,147 @@
+{
+  "Мобильное приложение": {
+    "description": "Создать свое мобильное приложение для онлайн-продаж",
+    "queue": [
+      {
+        "id": 1,
+        "title": "Task 1",
+        "description": "Description of Task 1",
+        "createdAt": "2023-10-01",
+        "workingTime": "2h 30m",
+        "endDate": null,
+        "priority": "High",
+        "files": ["file1.pdf", "screenshot.png"],
+        "status": "queue",
+        "subtasks": [
+          { "id": 101, "title": "Subtask 1", "status": "Done" },
+          { "id": 102, "title": "Subtask 2", "status": "done" }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Task 2",
+        "description": "Description of Task 2",
+        "createdAt": "2023-10-01",
+        "workingTime": "4h 30m",
+        "endDate": null,
+        "priority": "High",
+        "files": ["file1.pdf", "screenshot.png"],
+        "status": "queue",
+        "subtasks": [
+          { "id": 103, "title": "Subtask 1", "status": "Done" },
+          { "id": 104, "title": "Subtask 2", "status": "done" }
+        ]
+      }
+    ],
+    "development": [
+      {
+        "id": 3,
+        "title": "Task 3",
+        "description": "Description of Task 3",
+        "createdAt": "2023-10-02",
+        "workingTime": "3h 15m",
+        "endDate": null,
+        "priority": "Medium",
+        "files": ["design.pdf"],
+        "status": "development",
+        "subtasks": [
+          { "id": 105, "title": "Subtask 1", "status": "development" },
+          { "id": 106, "title": "Subtask 2", "status": "done" }
+        ]
+      }
+    ],
+    "done": [
+      {
+        "id": 4,
+        "title": "Task 4",
+        "description": "Description of Task 4",
+        "createdAt": "2023-09-30",
+        "workingTime": "1h 45m",
+        "endDate": "2023-10-01",
+        "priority": "Low",
+        "files": ["report.pdf"],
+        "status": "done",
+        "subtasks": [
+          { "id": 107, "title": "Subtask 1", "status": "Done" },
+          { "id": 108, "title": "Subtask 2", "status": "Done" }
+        ]
+      }
+    ]
+  },
+  "Веб приложение": {
+    "description": "Платформа для строительной компании",
+    "queue": [
+      {
+        "id": 5,
+        "title": "Task A",
+        "description": "Description of Task A",
+        "createdAt": "2023-10-03",
+        "workingTime": "2h",
+        "endDate": null,
+        "priority": "High",
+        "files": ["requirements.docx"],
+        "status": "queue",
+        "subtasks": [
+          { "id": 201, "title": "Subtask A1", "status": "done" },
+          { "id": 202, "title": "Subtask A2", "status": "done" }
+        ]
+      }
+    ],
+    "development": [
+      {
+        "id": 6,
+        "title": "Task B",
+        "description": "Description of Task B",
+        "createdAt": "2023-10-04",
+        "workingTime": "3h",
+        "endDate": null,
+        "priority": "Medium",
+        "files": ["design.sketch"],
+        "status": "development",
+        "subtasks": [
+          { "id": 203, "title": "Subtask B1", "status": "done" },
+          { "id": 204, "title": "Subtask B2", "status": "development" }
+        ]
+      }
+    ],
+    "done": []
+  },
+  "Api интеграция": {
+    "description": "Способ аутентификации и авторизации",
+    "queue": [
+      {
+        "id": 7,
+        "title": "Task X",
+        "description": "Description of Task X",
+        "createdAt": "2023-10-05",
+        "workingTime": "4h",
+        "endDate": null,
+        "priority": "Low",
+        "files": ["notes.txt"],
+        "status": "queue",
+        "subtasks": [
+          { "id": 301, "title": "Subtask X1", "status": "done" },
+          { "id": 302, "title": "Subtask X2", "status": "done" }
+        ]
+      }
+    ],
+    "development": [],
+    "done": [
+      {
+        "id": 8,
+        "title": "Task Y",
+        "description": "Description of Task Y",
+        "createdAt": "2023-10-01",
+        "workingTime": "5h",
+        "endDate": "2023-10-03",
+        "priority": "High",
+        "files": ["final.docx"],
+        "status": "done",
+        "subtasks": [
+          { "id": 303, "title": "Subtask Y1", "status": "Done" },
+          { "id": 304, "title": "Subtask Y2", "status": "Done" }
+        ]
+      }
+    ]
+  }
+}
