@@ -18,6 +18,8 @@ import SortableItem from "../SortableItem/SortableItem";
 import DroppableColumn from "../DroppableColumn/DroppableColumn";
 import HeaderCard from "../HeaderCard/HeaderCard";
 import { TaskStatus, Task, TasksCollection, TaskColumn } from "../types/types";
+import { motion } from "framer-motion";
+import styles from "./TaskBoard.module.scss";
 
 interface TaskBoardProps {
   projectName: string;
@@ -190,6 +192,23 @@ const TaskBoard: React.FC<TaskBoardProps> = ({
     [tasks, setTasks]
   );
 
+  const AnimatedOverlay: React.FC<{ activeTask: Task | null }> = ({
+    activeTask,
+  }) => {
+    if (!activeTask) return null;
+    return (
+      <motion.div
+        className="card"
+        initial={{ opacity: 0.8 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0.8 }}
+        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+      >
+        <div>{activeTask.title}</div>
+      </motion.div>
+    );
+  };
+
   return (
     <>
       <HeaderCard
@@ -244,16 +263,20 @@ const TaskBoard: React.FC<TaskBoardProps> = ({
                               padding: "10px",
                               backgroundColor: "white",
                               marginBottom: "10px",
+                              borderRadius: "4px",
+                              transition: "transform 0.25s ease",
                             }}
                           >
                             <h4>{task.title}</h4>
                             <p>{task.description}</p>
-                            {task.createdAt && (
-                              <p>Дата создания: {task.createdAt}</p>
-                            )}
-                            {task.workingTime && (
-                              <p>Время работы: {task.workingTime}</p>
-                            )}
+                            <div className={styles.grid}>
+                              {task.createdAt && (
+                                <p>Дата создания: {task.createdAt}</p>
+                              )}
+                              {task.workingTime && (
+                                <p>Время работы: {task.workingTime}</p>
+                              )}
+                            </div>
                             {task.endDate && (
                               <p>Дата окончания: {task.endDate}</p>
                             )}
@@ -272,14 +295,17 @@ const TaskBoard: React.FC<TaskBoardProps> = ({
                                 ))}
                               </div>
                             )}
-                            <button onClick={() => handleViewTask(task)}>
+                            <button
+                              className={styles.button}
+                              onClick={() => handleViewTask(task)}
+                            >
                               Посмотреть
                             </button>
                           </div>
                         </SortableItem>
                       ))
                     ) : (
-                      <p>Нет задач, удовлетворяющих условиаю поиск</p>
+                      <p>Нет задач (</p>
                     )}
                   </div>
                 </SortableContext>
@@ -289,12 +315,13 @@ const TaskBoard: React.FC<TaskBoardProps> = ({
         </div>
         <DragOverlay>
           {activeId ? (
-            <div style={{ padding: "10px", backgroundColor: "white" }}>
-              {Object.values(tasks)
-                .flat()
-                .find((task) => task.id === activeId)?.title ??
-                "Перетаскивание"}
-            </div>
+            <AnimatedOverlay
+              activeTask={
+                Object.values(tasks)
+                  .flat()
+                  .find((task) => task.id === activeId) || null
+              }
+            />
           ) : null}
         </DragOverlay>
       </DndContext>

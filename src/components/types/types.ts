@@ -21,7 +21,7 @@ export interface Task {
   endDate?: string | null;
   priority?: string;
   files?: string[];
-  status: "queue" | "development" | "done";
+  status: TaskStatus;
   subtasks?: { id: number; title: string; status: string }[];
   comments?: Comment[];
 }
