@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import styles from "./AddProjectModal.module.scss";
 
 interface AddProjectModalProps {
@@ -15,27 +15,56 @@ const AddProjectModal: React.FC<AddProjectModalProps> = ({
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
 
-  if (!isOpen) return null;
+  const handleSubmit = useCallback(
+    (e: React.FormEvent) => {
+      e.preventDefault();
+      const trimmedName = name.trim();
+      const trimmedDescription = description.trim();
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const trimmedName = name.trim();
-    const trimmedDescription = description.trim();
+      if (!trimmedName) return;
 
-    if (!trimmedName) return;
+      onAdd(trimmedName, trimmedDescription);
+      setName("");
+      setDescription("");
+    },
+    [name, description, onAdd]
+  );
 
-    onAdd(trimmedName, trimmedDescription);
-    setName("");
-    setDescription("");
-  };
-
-  const handleBackdropClick = () => {
+  const handleBackdropClick = useCallback(() => {
     onClose();
-  };
+  }, [onClose]);
 
-  const handleModalClick = (e: React.MouseEvent) => {
+  const handleModalClick = useCallback((e: React.MouseEvent) => {
     e.stopPropagation();
-  };
+  }, []);
+
+  const nameInput = useMemo(
+    () => (
+      <input
+        id="projectName"
+        type="text"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        required
+      />
+    ),
+    [name]
+  );
+
+  const descriptionTextarea = useMemo(
+    () => (
+      <textarea
+        id="projectDescription"
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+      />
+    ),
+    [description]
+  );
+
+  if (!isOpen) {
+    return null;
+  }
 
   return (
     <div className={styles.modalBackdrop} onClick={handleBackdropClick}>
@@ -44,21 +73,11 @@ const AddProjectModal: React.FC<AddProjectModalProps> = ({
         <form onSubmit={handleSubmit}>
           <div className={styles.formGroup}>
             <label htmlFor="projectName">Название проекта</label>
-            <input
-              id="projectName"
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
+            {nameInput}
           </div>
           <div className={styles.formGroup}>
             <label htmlFor="projectDescription">Описание проекта</label>
-            <textarea
-              id="projectDescription"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            />
+            {descriptionTextarea}
           </div>
           <div className={styles.buttonGroup}>
             <button type="submit">Добавить проект</button>

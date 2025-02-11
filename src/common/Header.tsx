@@ -28,8 +28,6 @@ const Header = () => {
           done: [],
         },
       };
-
-      // Передаем имя и описание нового проекта
       addProject(projectName, projectDescription);
       setIsModalOpen(false);
     },

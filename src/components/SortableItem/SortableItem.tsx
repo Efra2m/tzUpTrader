@@ -14,7 +14,8 @@ const SortableItem: React.FC<SortableItemProps> = ({ id, children }) => {
   const style = useMemo(
     () => ({
       transform: CSS.Transform.toString(transform),
-      transition,
+      transition: transition || "transform 250ms ease",
+      zIndex: 1,
     }),
     [transform, transition]
   );
