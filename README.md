@@ -1,1 +1,1 @@
-Деплой : https://tzuptrader.netlify.app/
+Деплой : https://uptrader.netlify.app/
